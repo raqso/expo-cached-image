@@ -3,8 +3,10 @@
   "version": "47.1.0",
   "description": "Super fast cached image component for react-native applications powered by expo",
   "main": "lib/index.js",
+  "types": ".d.ts",
   "files": [
-    "lib"
+    "lib",
+    ".d.ts"
   ],
   "scripts": {
     "prepublish": "echo 'prepublishing' && rm -rf ./lib && babel src --out-dir lib && yarn link",
