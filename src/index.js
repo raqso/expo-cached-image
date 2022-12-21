@@ -8,7 +8,7 @@ import PropTypes from "prop-types"
 import * as CONST from "./consts.js"
 
 const CachedImage = (props) => {
-  const { source, cacheKey, placeholderContent } = props
+  const { source, cacheKey, placeholderContent, ImageComponent = Image } = props;
   const { uri, headers, expiresIn } = source
   const fileURI = `${CONST.IMAGE_CACHE_FOLDER}${cacheKey}`
 
@@ -72,20 +72,21 @@ const CachedImage = (props) => {
   if (!imgUri) return placeholderContent || null
 
   return (
-    <Image
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-      source={{
-        ...source,
-        uri: imgUri,
-      }}
-    />
-  )
+		<ImageComponent
+			// eslint-disable-next-line react/jsx-props-no-spreading
+			{...props}
+			source={{
+				...source,
+				uri: imgUri,
+			}}
+		/>
+  );
 }
 
 CachedImage.propTypes = {
   source: PropTypes.object.isRequired,
   cacheKey: PropTypes.string.isRequired,
+  ImageComponent: PropTypes.elementType,
 }
 
 export const CacheManager = {
